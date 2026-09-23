@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><title>BARAMEEL RUN — Choose Your Runner</title><link rel="stylesheet" href="./styles.css"></head><body><main class="stage fade-in"><img id="runnerArt" class="base" alt="Choose your runner"><div id="cards"></div><div id="barOverlay" class="screen02-bars" aria-hidden="true"><div class="screen02-bar"><div class="fill"></div></div><div class="screen02-bar"><div class="fill"></div></div><div class="screen02-bar"><div class="fill"></div></div><div class="screen02-bar"><div class="fill"></div></div></div><button class="hotspot" aria-label="Back" style="left:2%;top:2%;width:19%;height:8%" onclick="back()"></button><button id="confirm" class="hotspot" aria-label="Choose runner" style="left:49%;bottom:10%;width:47%;height:14%"></button><button id="backFallback" class="back-fallback show" type="button" aria-label="Back" onclick="back()">← BACK</button></main><script src="./app.js"></script><script>
+const art=document.getElementById('runnerArt');
+const overlay=document.getElementById('barOverlay');
+const backFallback=document.getElementById('backFallback');
+const values=BR.RUNNERS;
+function back(){BR.backSound();BR.go('index.html')}
+function render(){
+  const c=BR.selected(),r=values[c];
+  BR.setArt('runnerArt','./assets/screen02-'+c+'.png',BR.CHARACTERS.map(k=>'./assets/screen03-'+k+'.png'));
+  const vals=[r.speed,r.jump,r.coin,r.energy];
+  overlay.classList.remove('animate'); void overlay.offsetWidth; overlay.classList.add('animate');
+  overlay.querySelectorAll('.fill').forEach((el,i)=>el.style.width=(vals[i]*20)+'%');
+}
+function select(c){BR.selectRunner(c);render();BR.selectSound(c);BR.flash();BR.toast(BR.RUNNERS[c].name+' SELECTED')}
+BR.CHARACTERS.forEach((c,i)=>{const b=document.createElement('button');b.className='hotspot';b.setAttribute('aria-label',BR.RUNNERS[c].name);b.style.left=(1.3+i*16.35)+'%';b.style.width='15.5%';b.style.top='20.3%';b.style.height='19%';b.onclick=()=>select(c);document.getElementById('cards').appendChild(b)});
+document.getElementById('confirm').onclick=()=>{BR.confirmSound();BR.go('screen03.html')};
+render();
+</script></body></html>
