@@ -1,0 +1,7 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><title>BARAMEEL RUN — Choose Your Runner</title><link rel="stylesheet" href="./styles.css"></head><body><main class="stage fade-in"><img id="runnerArt" class="base" alt="Choose your runner"><div id="cards"></div><button class="hotspot" aria-label="Back" style="left:2%;top:2%;width:19%;height:8%" onclick="BR.go('index.html')"></button><button id="confirm" class="hotspot" aria-label="Choose runner" style="left:49%;bottom:10%;width:47%;height:14%"></button></main><script src="./app.js"></script><script>
+const art=document.getElementById('runnerArt');
+function render(){const c=BR.selected();BR.setArt('runnerArt','./assets/screen02-'+c+'.png',['./assets/screen03-'+c+'.png'])}
+function select(c){BR.selectRunner(c);render();BR.selectSound(c);BR.flash();BR.toast(BR.RUNNERS[c].name+' SELECTED')}
+BR.CHARACTERS.forEach((c,i)=>{const b=document.createElement('button');b.className='hotspot';b.setAttribute('aria-label',BR.RUNNERS[c].name);b.style.left=(1.3+i*16.35)+'%';b.style.width='15.5%';b.style.top='20.3%';b.style.height='19%';b.onclick=()=>select(c);document.getElementById('cards').appendChild(b)});
+document.getElementById('confirm').onclick=()=>{BR.confirmSound();BR.go('screen03.html')};render();
+</script></body></html>
