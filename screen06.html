@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>BARAMEEL RUN — Checkpoint Found</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<main class="checkpoint-stage fade-in">
+  <img id="checkpointBg" class="checkpoint-art" src="./assets/screen06-base.png" alt="Checkpoint found">
+
+  <!-- Partner logo/image goes here. Replace assets/checkpoint-logo.png later. -->
+  <div class="checkpoint-logo-slot" aria-label="Checkpoint partner logo">
+    <img id="checkpointLogo" class="checkpoint-logo" src="./assets/checkpoint-logo.png" alt="Checkpoint partner logo">
+    <div id="logoFallback" class="checkpoint-logo-fallback">
+      <span>CHECKPOINT</span>
+      <small>PARTNER LOGO</small>
+    </div>
+  </div>
+
+  <button class="checkpoint-back" aria-label="Back" onclick="goBack()"></button>
+  <button class="checkpoint-continue" aria-label="Continue" onclick="continueAfterReward()"></button>
+</main>
+
+<script src="./app.js"></script>
+<script>
+const logo=document.getElementById('checkpointLogo');
+const fallback=document.getElementById('logoFallback');
+logo.addEventListener('load',()=>{fallback.style.display='none'; logo.classList.add('loaded')});
+logo.addEventListener('error',()=>{logo.style.display='none'; fallback.style.display='flex'});
+
+function goBack(){ BR.backSound(); setTimeout(()=>location.href='./screen04.html',90); }
+function continueAfterReward(){ BR.confirmSound(); BR.flash(); }
+
+/* Keep the screen silent on direct opening; the reward sound is triggered by the QR scan in Screen 05. */
+</script>
+</body>
+</html>
