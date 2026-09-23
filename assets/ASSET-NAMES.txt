@@ -1,0 +1,19 @@
+Expected character assets:
+screen02-rookie.png
+screen02-skater.png
+screen02-brona.png
+screen02-racer.png
+screen02-chiller.png
+screen02-dreamer.png
+screen03-rookie.png
+screen03-skater.png
+screen03-brona.png
+screen03-racer.png
+screen03-chiller.png
+screen03-dreamer.png
+screen04-rookie.png
+screen04-skater.png
+screen04-brona.png
+screen04-racer.png
+screen04-chiller.png
+screen04-dreamer.png

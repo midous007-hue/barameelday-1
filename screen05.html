@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><title>Scan the Checkpoint</title><link rel="stylesheet" href="./styles.css"></head><body><div id="app"><div id="scanner" class="screen active">
+<button class="close-scan" aria-label="Close" onclick="BR.go('screen04.html')">×</button><div class="bolt">ϟ</div>
+<div class="scan-header"><h1>SCAN</h1><h2>THE CHECKPOINT</h2><p>Point your camera at the QR code</p></div>
+<div id="frame" class="scan-frame"><video id="camera" playsinline muted></video><div id="placeholder" class="camera-placeholder">CAMERA READY<br><small>Tap below to activate scanning</small></div><div class="scan-corners"></div><div class="scan-line"></div><div id="success" class="success"><h3>CHECKPOINT FOUND</h3><p id="decoded">QR detected.</p><button onclick="location.reload()">SCAN AGAIN</button></div></div>
+<button id="startCam" class="scan-btn">OPEN CAMERA &amp; SCAN</button><div id="status" class="status">Ready to scan…</div>
+</div></div><div id="flash"></div><script src="./app.js"></script><script>
+let stream=null, detector=null, scanning=false, raf=null;
+const video=document.getElementById('camera'), placeholder=document.getElementById('placeholder'), frame=document.getElementById('frame'), status=document.getElementById('status'), btn=document.getElementById('startCam'), success=document.getElementById('success'), decoded=document.getElementById('decoded');
+
+async function startCamera(){
+  BR.scanSound();
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}},audio:false});
+    video.srcObject=stream; await video.play();
+    video.style.display='block';placeholder.style.display='none';frame.classList.add('scanning');status.textContent='Scanning…';btn.textContent='SCANNING…';
+    scanning=true;
+    if('BarcodeDetector' in window){
+      try{detector=new BarcodeDetector({formats:['qr_code']})}catch(e){detector=new BarcodeDetector()}
+      loopDetect();
+    } else {
+      status.textContent='Scanning camera… (QR decoding depends on browser support)';
+    }
+  }catch(err){
+    status.textContent='Camera access was blocked. Allow camera permission and try again.';
+    placeholder.innerHTML='CAMERA ACCESS REQUIRED<br><small>Use HTTPS and allow camera permission.</small>';
+  }
+}
+async function loopDetect(){
+  if(!scanning||!detector)return;
+  try{
+    const codes=await detector.detect(video);
+    if(codes.length){
+      const value=codes[0].rawValue||'QR code detected';
+      decoded.textContent=value;
+      success.classList.add('show');status.textContent='Checkpoint found';scanning=false;frame.classList.remove('scanning');BR.confirmSound();
+      stream?.getTracks().forEach(t=>t.stop()); return;
+    }
+  }catch(e){}
+  raf=requestAnimationFrame(loopDetect);
+}
+btn.onclick=startCamera;
+window.addEventListener('pagehide',()=>stream?.getTracks().forEach(t=>t.stop()));
+</script></body></html>
