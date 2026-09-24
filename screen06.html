@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>BARAMEEL RUN — Checkpoint Found</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<main class="checkpoint-stage fade-in">
+  <!-- The approved EGO result artwork is fully composed/merged into one image.
+       No photo/name/card is layered over it. -->
+  <img id="checkpointBg" class="checkpoint-art" src="./assets/screen06-base.png" alt="Checkpoint found — Salon EGO">
+
+  <!-- Transparent hotspots only: the printed artwork itself remains untouched. -->
+  <a class="social-hit social-instagram active" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"></a>
+  <a class="social-hit social-facebook active" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"></a>
+  <a class="social-hit social-tiktok active" href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok"></a>
+  <a class="social-hit social-website" href="#" aria-label="Website"></a>
+
+  <button class="checkpoint-back back-hotspot" aria-label="Back" onclick="goBack()"></button>
+  <button class="checkpoint-continue" aria-label="Continue" onclick="continueAfterReward()"></button>
+</main>
+
+<script src="./app.js"></script>
+<script>
+function goBack(){BR.backSound();setTimeout(()=>location.href='./screen04.html',90)}
+function continueAfterReward(){BR.confirmSound();BR.flash();setTimeout(()=>location.href='./screen04.html',120)}
+</script>
+</body>
+</html>
