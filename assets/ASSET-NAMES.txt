@@ -1,19 +1,9 @@
-Expected character assets:
-screen02-rookie.png
-screen02-skater.png
-screen02-brona.png
-screen02-racer.png
-screen02-chiller.png
-screen02-dreamer.png
-screen03-rookie.png
-screen03-skater.png
-screen03-brona.png
-screen03-racer.png
-screen03-chiller.png
-screen03-dreamer.png
-screen04-rookie.png
-screen04-skater.png
-screen04-brona.png
-screen04-racer.png
-screen04-chiller.png
-screen04-dreamer.png
+BARAMEEL RUN assets
+
+screen01.png — approved Screen 01 artwork
+screen05-brona.png — approved Brona QR scan artwork
+screen06-base.png — approved flattened CHECKPOINT FOUND artwork
+screen07.png — approved GO TO BARAMEEL artwork, with empty digit boxes for live GPS values
+reward-levelup.mp3 — user-supplied retro arcade level-up/reward sound, played on Screen 06 after successful QR scan
+checkpoint-ego-qr.png — EGO checkpoint QR
+checkpoint-ego.jpg — EGO reference photo
